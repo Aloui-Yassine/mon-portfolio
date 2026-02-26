@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV — Aloui Yassine</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg:      #0a0a0a;
+            --bg2:     #111111;
+            --surface: #1c1c1c;
+            --border:  rgba(255,255,255,0.07);
+            --border2: rgba(255,255,255,0.15);
+            --text:    #f5f5f5;
+            --muted:   #5a5a5a;
+            --mid:     #8a8a8a;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.35;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 58px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 3rem;
+            background: rgba(10,10,10,0.88);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+        }
+
+        .nav-back {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--mid);
+            text-decoration: none;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: color 0.2s;
+        }
+        .nav-back:hover { color: var(--text); }
+        .nav-back svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+        .nav-center {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .nav-print {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--mid);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: 1px solid var(--border2);
+            padding: 0.38rem 0.9rem;
+            border-radius: 5px;
+            background: transparent;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s, border-color 0.2s;
+        }
+        .nav-print:hover { background: var(--text); color: var(--bg); border-color: var(--text); }
+        .nav-print svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+        /* MAIN */
+        main {
+            max-width: 880px;
+            margin: 0 auto;
+            padding: 96px 2rem 5rem;
+        }
+
+        /* HEADER */
+        .cv-header {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 2.5rem;
+            align-items: end;
+            padding-bottom: 2.5rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 3.5rem;
+            animation: fadeUp 0.6s ease both;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(18px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .hdr-tag {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.62rem;
+            color: var(--muted);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 0.7rem;
+        }
+
+        .hdr-name {
+            font-family: 'Syne', sans-serif;
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .hdr-sub {
+            font-size: 0.9rem;
+            color: var(--mid);
+            font-style: italic;
+        }
+
+        .hdr-contacts {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            align-items: flex-end;
+        }
+
+        .contact-row {
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.67rem;
+            color: var(--mid);
+        }
+
+        .contact-row a { color: var(--mid); text-decoration: none; transition: color 0.2s; }
+        .contact-row a:hover { color: var(--text); }
+
+        .contact-row svg {
+            width: 11px; height: 11px;
+            stroke: var(--muted);
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            flex-shrink: 0;
+        }
+
+        /* SECTION */
+        .cv-section {
+            margin-bottom: 3rem;
+            animation: fadeUp 0.6s ease both;
+        }
+
+        .cv-section:nth-child(2) { animation-delay: 0.08s; }
+        .cv-section:nth-child(3) { animation-delay: 0.16s; }
+        .cv-section:nth-child(4) { animation-delay: 0.24s; }
+        .cv-section:nth-child(5) { animation-delay: 0.32s; }
+        .cv-section:nth-child(6) { animation-delay: 0.40s; }
+
+        .section-label {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.6rem;
+        }
+
+        .section-label .num {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.58rem;
+            color: var(--muted);
+            letter-spacing: 1px;
+        }
+
+        .section-label h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: 3.5px;
+            text-transform: uppercase;
+        }
+
+        .section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        /* À PROPOS */
+        .about-text {
+            font-size: 0.9rem;
+            color: var(--mid);
+            line-height: 1.9;
+            max-width: 750px;
+        }
+
+        /* COMPÉTENCES */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.55rem;
+        }
+
+        .skill-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.9rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.9rem 1.1rem;
+            transition: border-color 0.25s, background 0.25s;
+        }
+
+        .skill-card:hover { border-color: var(--border2); background: #222; }
+
+        .skill-dot {
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background: var(--mid);
+            flex-shrink: 0;
+            margin-top: 0.45rem;
+        }
+
+        .skill-content .sk-title {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text);
+            margin-bottom: 0.25rem;
+        }
+
+        .skill-content .sk-desc {
+            font-size: 0.78rem;
+            color: var(--muted);
+            line-height: 1.55;
+        }
+
+        /* FORMATION */
+        .formation-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .form-block {
+            position: relative;
+            padding-left: 2rem;
+            padding-bottom: 2rem;
+        }
+
+        .form-block:last-child { padding-bottom: 0; }
+
+        .form-block::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 5px;
+            width: 8px; height: 8px;
+            border: 1.5px solid var(--border2);
+            border-radius: 50%;
+            background: var(--bg);
+            z-index: 1;
+        }
+
+        .form-block::after {
+            content: '';
+            position: absolute;
+            left: 3.5px; top: 14px; bottom: 0;
+            width: 1px;
+            background: var(--border);
+        }
+
+        .form-block:last-child::after { display: none; }
+
+        .form-period {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.62rem;
+            color: var(--muted);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 0.3rem;
+        }
+
+        .form-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.2rem;
+        }
+
+        .form-school {
+            font-size: 0.78rem;
+            color: var(--mid);
+            font-style: italic;
+            margin-bottom: 0.9rem;
+        }
+
+        .form-points {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .form-point {
+            display: flex;
+            gap: 0.7rem;
+            font-size: 0.81rem;
+            color: var(--muted);
+            line-height: 1.55;
+        }
+
+        .form-point::before {
+            content: '—';
+            font-family: 'DM Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--muted);
+            flex-shrink: 0;
+            margin-top: 0.15rem;
+        }
+
+        /* EXPÉRIENCES */
+        .exp-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .exp-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.4rem;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.25s;
+        }
+
+        .exp-card::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.05) 100%);
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: transform 0.35s ease;
+        }
+
+        .exp-card:hover::before { transform: scaleY(1); }
+        .exp-card:hover { border-color: var(--border2); }
+
+        .exp-badge {
+            display: inline-block;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.58rem;
+            color: var(--muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: 1px solid var(--border);
+            border-radius: 3px;
+            padding: 0.15rem 0.5rem;
+            margin-bottom: 0.7rem;
+        }
+
+        .exp-name {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.2rem;
+        }
+
+        .exp-sub {
+            font-size: 0.75rem;
+            color: var(--mid);
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .exp-points {
+            display: flex;
+            flex-direction: column;
+            gap: 0.38rem;
+        }
+
+        .exp-pt {
+            display: flex;
+            gap: 0.6rem;
+            font-size: 0.8rem;
+            color: var(--muted);
+            line-height: 1.55;
+        }
+
+        .exp-pt::before {
+            content: '·';
+            color: var(--border2);
+            font-size: 1.1rem;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        /* DIPLÔMES */
+        .diplomes-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .dip-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem 1.1rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 7px;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .dip-row:hover { border-color: var(--border2); background: #222; }
+
+        .dip-icon {
+            width: 30px; height: 30px;
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .dip-icon svg {
+            width: 13px; height: 13px;
+            stroke: var(--mid);
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .dip-name {
+            flex: 1;
+            font-size: 0.85rem;
+            color: var(--text);
+        }
+
+        .dip-detail {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.62rem;
+            color: var(--muted);
+            letter-spacing: 0.5px;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--border);
+            font-family: 'DM Mono', monospace;
+            font-size: 0.62rem;
+            color: var(--muted);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 640px) {
+            nav { padding: 0 1.2rem; }
+            main { padding: 80px 1.2rem 3rem; }
+            .cv-header { grid-template-columns: 1fr; }
+            .hdr-name { font-size: 2.2rem; }
+            .hdr-contacts { align-items: flex-start; }
+            .skills-grid { grid-template-columns: 1fr; }
+            .exp-grid { grid-template-columns: 1fr; }
+        }
+
+        @media print {
+            nav { display: none; }
+            main { padding: 2rem; }
+            body::before { display: none; }
+            .exp-card, .skill-card, .dip-row { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="nav-back">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        Portfolio
+    </a>
+    <span class="nav-center">Curriculum Vitæ</span>
+    <button class="nav-print" onclick="window.print()">
+        <svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Imprimer
+    </button>
+</nav>
+
+<main>
+
+    <!-- HEADER -->
+    <div class="cv-header">
+        <div>
+            <div class="hdr-tag">Candidature au poste d'alternant</div>
+            <h1 class="hdr-name">Aloui Yassine</h1>
+            <p class="hdr-sub">BTS CIEL · Informatique &amp; Réseaux · Cybersécurité</p>
+        </div>
+        <div class="hdr-contacts">
+            <div class="contact-row">
+                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                07 69 04 61 18
+            </div>
+            <div class="contact-row">
+                <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Corbeil-Essonnes, 91
+            </div>
+            <div class="contact-row">
+                <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <a href="mailto:contact.yassine16@gmail.com">contact.yassine16@gmail.com</a>
+            </div>
+            <div class="contact-row">
+                <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                <a href="https://www.linkedin.com/in/yassine-aloui-contact" target="_blank">linkedin.com/in/yassine-aloui-contact</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- À PROPOS -->
+    <div class="cv-section">
+        <div class="section-label">
+            <span class="num">01</span>
+            <h2>À propos</h2>
+        </div>
+        <p class="about-text">
+            Étudiant en BTS CIEL option A — Informatique et Réseaux au lycée Robert Doisneau, passionné par le numérique et les technologies. J'ai acquis de solides compétences en programmation, en gestion et dépannage de réseaux, ainsi qu'en sécurité informatique, renforcées par l'obtention de la certification Cisco CCNA. Sérieux, curieux et motivé, je souhaite poursuivre ma formation dans un environnement stimulant où je pourrai développer mes connaissances, mettre en pratique mes compétences techniques et progresser dans le domaine de l'informatique et des réseaux.
+        </p>
+    </div>
+
+    <!-- COMPÉTENCES -->
+    <div class="cv-section">
+        <div class="section-label">
+            <span class="num">02</span>
+            <h2>Compétences</h2>
+        </div>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-dot"></div>
+                <div class="skill-content">
+                    <div class="sk-title">Programmation</div>
+                    <div class="sk-desc">Maîtrise des langages C, C++, Python, HTML, CSS, PHP et JavaScript.</div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-dot"></div>
+                <div class="skill-content">
+                    <div class="sk-title">Gestion des réseaux</div>
+                    <div class="sk-desc">Configuration, maintenance et dépannage des infrastructures réseau.</div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-dot"></div>
+                <div class="skill-content">
+                    <div class="sk-title">Cisco CCNA</div>
+                    <div class="sk-desc">Connaissance approfondie des protocoles, équipements Cisco et principes de sécurité.</div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-dot"></div>
+                <div class="skill-content">
+                    <div class="sk-title">Bases de données</div>
+                    <div class="sk-desc">Utilisation du langage SQL pour la création et la maintenance de bases de données.</div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-dot"></div>
+                <div class="skill-content">
+                    <div class="sk-title">Travail en équipe</div>
+                    <div class="sk-desc">Collaboration efficace dans les projets scolaires et professionnels.</div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-dot"></div>
+                <div class="skill-content">
+                    <div class="sk-title">Organisation &amp; autonomie</div>
+                    <div class="sk-desc">Capacité à gérer les priorités et à travailler de manière responsable avec rigueur et méthode.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FORMATION -->
+    <div class="cv-section">
+        <div class="section-label">
+            <span class="num">03</span>
+            <h2>Formation</h2>
+        </div>
+        <div class="formation-list">
+            <div class="form-block">
+                <div class="form-period">Septembre 2026 — Juin 2029 · À venir</div>
+                <div class="form-title">Bachelor Administrateur d'Infrastructures Sécurisées</div>
+                <div class="form-school">ECE École d'Ingénieurs · Paris · Bac+3 · En alternance</div>
+                <div class="form-points">
+                    <div class="form-point">Administrer &amp; sécuriser les infrastructures : Firewall, VPN, Active Directory, SIEM, SOC, Hardening.</div>
+                    <div class="form-point">Concevoir &amp; mettre en œuvre des solutions : Architecture réseau, Cloud sécurisé, Zero Trust, Audit.</div>
+                    <div class="form-point">Maîtriser les risques &amp; gérer les crises : Risk management, ANSSI, ISO 27001, RGPD, PCA/PRA.</div>
+                </div>
+            </div>
+            <div class="form-block">
+                <div class="form-period">Septembre 2024 — Juin 2026</div>
+                <div class="form-title">BTS CIEL — Cybersécurité, Informatique et Réseaux</div>
+                <div class="form-school">Lycée Robert Doisneau · Option A : Informatique et Réseaux</div>
+                <div class="form-points">
+                    <div class="form-point">Administration réseau : Installation, configuration et maintenance des réseaux informatiques.</div>
+                    <div class="form-point">Cybersécurité : Mise en place de mesures de protection et détection des vulnérabilités.</div>
+                    <div class="form-point">Programmation : Développement d'applications et scripts en C, C++, Python, HTML, CSS, PHP et JavaScript.</div>
+                    <div class="form-point">Systèmes informatiques : Gestion et dépannage de postes clients et serveurs.</div>
+                    <div class="form-point">Administration informatique : supervision d'environnements réseaux sous Linux et Windows.</div>
+                    <div class="form-point">Bases de données : Conception, gestion et interrogation de bases de données SQL.</div>
+                </div>
+            </div>
+            <div class="form-block">
+                <div class="form-period">Septembre 2023 — Juin 2024</div>
+                <div class="form-title">Baccalauréat général</div>
+                <div class="form-school">Lycée Robert Doisneau · Spécialités NSI + Mathématiques</div>
+                <div class="form-points">
+                    <div class="form-point">Analyse et logique mathématique : développement du raisonnement scientifique.</div>
+                    <div class="form-point">Sciences numériques : principes de l'informatique, développement orienté objet, web et systèmes d'information.</div>
+                    <div class="form-point">Initiation à la programmation : découverte des langages et de la logique algorithmique.</div>
+                    <div class="form-point">Culture scientifique : approche globale des technologies et de leurs enjeux sociétaux.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- EXPÉRIENCES -->
+    <div class="cv-section">
+        <div class="section-label">
+            <span class="num">04</span>
+            <h2>Expériences &amp; Projets</h2>
+        </div>
+        <div class="exp-grid">
+            <div class="exp-card">
+                <div class="exp-badge">Stage · 3 mois</div>
+                <div class="exp-name">C-COM 66 SARL</div>
+                <div class="exp-sub">Prestataire télécom &amp; réseau</div>
+                <div class="exp-points">
+                    <div class="exp-pt">Testing et mise en place d'équipements réseaux (switches, routeurs, bornes WiFi).</div>
+                    <div class="exp-pt">Gestion de bases de données — mise à jour des stocks et consultation des données.</div>
+                    <div class="exp-pt">Déploiement d'équipements réseaux avec commandes d'administration pour vérification de la mise en place.</div>
+                </div>
+            </div>
+            <div class="exp-card">
+                <div class="exp-badge">Projet scolaire</div>
+                <div class="exp-name">Surveillance des Eaux Superficielles</div>
+                <div class="exp-sub">Système IoT automatisé &amp; sécurisé</div>
+                <div class="exp-points">
+                    <div class="exp-pt">Conception d'un système automatisé sécurisé de surveillance de la qualité des eaux.</div>
+                    <div class="exp-pt">Déploiement de capteurs IoT pour la collecte de données environnementales.</div>
+                    <div class="exp-pt">Développement d'une infrastructure réseau sécurisée pour la transmission des données.</div>
+                    <div class="exp-pt">Développement d'une IHM sécurisée pour la visualisation des données en temps réel.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DIPLÔMES -->
+    <div class="cv-section">
+        <div class="section-label">
+            <span class="num">05</span>
+            <h2>Diplômes &amp; Certifications</h2>
+        </div>
+        <div class="diplomes-list">
+            <div class="dip-row">
+                <div class="dip-icon">
+                    <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                </div>
+                <span class="dip-name">Cisco CCNA</span>
+                <span class="dip-detail">Cisco Networking Academy · 2025</span>
+            </div>
+            <div class="dip-row">
+                <div class="dip-icon">
+                    <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                </div>
+                <span class="dip-name">Certification PIX</span>
+                <span class="dip-detail">Compétences numériques · 2026</span>
+            </div>
+            <div class="dip-row">
+                <div class="dip-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <span class="dip-name">Introduction à la cybersécurité</span>
+                <span class="dip-detail">Cisco Netacad · 2025</span>
+            </div>
+            <div class="dip-row">
+                <div class="dip-icon">
+                    <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                </div>
+                <span class="dip-name">Baccalauréat général</span>
+                <span class="dip-detail">SPE NSI &amp; Maths · Mention · 2024</span>
+            </div>
+            <div class="dip-row">
+                <div class="dip-icon">
+                    <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                </div>
+                <span class="dip-name">Brevet série générale</span>
+                <span class="dip-detail">Mention Bien</span>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<footer>
+    © 2025 Aloui Yassine · BTS CIEL · Certifié CCNA · Corbeil-Essonnes
+</footer>
+
+</body>
+</html>
